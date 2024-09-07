@@ -30,5 +30,7 @@ public class MovieEntity {
     private List<String> genres;
     private Integer year;
     private Date dateAdded = new Date();
+    @OneToMany(mappedBy = "movie")
+    private List<BorrowedEntity> borrowed;
 
 }
