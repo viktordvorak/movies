@@ -1,8 +1,10 @@
 package cz.dvorakv.entity.repository.filter;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class MovieFilter {
 
     private Long directorID;
@@ -14,7 +16,7 @@ public class MovieFilter {
     //private Integer limit = 10;
 
     public enum Availability {
-        AVAILABLE,UNAVAILABLE
+        AVAILABLE, UNAVAILABLE
     }
 
 }

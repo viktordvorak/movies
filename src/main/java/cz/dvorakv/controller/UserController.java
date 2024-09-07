@@ -22,8 +22,6 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     private UserService service;
 
@@ -71,7 +69,7 @@ public class UserController {
         model.setUserId(user.getUserId());
         model.setEmail(user.getEmail());
         model.setAdmin(user.isAdmin());
-        LOG.info("logged user: " + model.getEmail());
+        //logger.info("logged user: " + model.getEmail());
         return model;
     }
 
@@ -90,4 +88,5 @@ public class UserController {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public void handleServletException() {
     }
+
 }

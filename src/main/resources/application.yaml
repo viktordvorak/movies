@@ -24,14 +24,21 @@ spring:
 Dfile.encoding: UTF-8
 Dsun.jnu.encoding: UTF-8
 
-logging:
-  level:
-    com:
-      baeldung:
-        testloglevel=DEBUG:
+
+  #logging:
+  #level:
+  #com:
+  #baeldung:
+#testloglevel=DEBUG:
 
 cz.dvorakv:
   genres[0]: comedy
   genres[1]: adventure
   genres[2]: romantic
   genres[3]: action
+
+  logging:
+    level:
+      com:
+        example:
+          logging=INFO:
