@@ -1,5 +1,6 @@
 package cz.dvorakv.service;
 
+import cz.dvorakv.constant.UserRole;
 import cz.dvorakv.dto.UserDto;
 import cz.dvorakv.entity.repository.filter.UserFilter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,5 +18,7 @@ public interface UserService  extends UserDetailsService {
     UserDto getUser(Long id);
 
     UserDto deleteUser(Long id);
+
+    UserRole[] getRoles();
 
 }

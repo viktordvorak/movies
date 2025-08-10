@@ -10,6 +10,7 @@ import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,8 +47,12 @@ public class PersonTest {
 
         val created = personService.addPerson(mapper.toDto(person));
 
+        ArgumentCaptor<PersonEntity> captor = ArgumentCaptor.forClass(PersonEntity.class);
+        Mockito.verify(personRepository).save(captor.capture());
+
+        PersonEntity savedPerson = captor.getValue();
         Assert.assertEquals("John Doe", created.getName());
-        Mockito.verify(personRepository, Mockito.times(1)).save(person);
+        Mockito.verify(personRepository, Mockito.times(1)).save(savedPerson);
     }
 
     @Test
@@ -59,12 +64,17 @@ public class PersonTest {
         person.setBiography("Updated Biography");
         person.setRole(RoleType.ACTOR);
 
-        //Mockito.when(personRepository.save(any(PersonEntity.class))).thenReturn(person);
+        Mockito.when(personRepository.save(any(PersonEntity.class))).thenReturn(person);
 
-        PersonDto updated = personService.updatePerson(mapper.toDto(person), 1L);
+        val updated = personService.updatePerson(mapper.toDto(person), 1L);
+
+        ArgumentCaptor<PersonEntity> captor = ArgumentCaptor.forClass(PersonEntity.class);
+        Mockito.verify(personRepository).save(captor.capture());
+
+        val savedEntity = captor.getValue();
 
         Assert.assertEquals("Jane Doe", updated.getName());
-        Mockito.verify(personRepository, Mockito.times(1)).save(person);
+        Mockito.verify(personRepository, Mockito.times(1)).save(savedEntity);
     }
 
     @Test

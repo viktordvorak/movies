@@ -30,7 +30,7 @@ public class CustomerEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CustomerLabel label;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer")//, cascade = CascadeType.ALL, orphanRemoval = true
     private List<BorrowedEntity> borrowedMovies;
 
 }

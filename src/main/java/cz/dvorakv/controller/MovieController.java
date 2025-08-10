@@ -27,7 +27,7 @@ public class MovieController {
         return service.addMovie(dto);
     }
 
-    @Secured("ROLE_ADMIN")
+    //@Secured("ROLE_ADMIN")
     @PutMapping("/movie/{id}")
     public MovieDto editMovie(@RequestBody final MovieDto dto, @PathVariable final Long id) {
         return service.updateMovie(dto, id);
@@ -43,7 +43,7 @@ public class MovieController {
         return service.getAllMovies(filter);
     }
 
-    @Secured("ROLE_ADMIN")
+    //@Secured("ROLE_ADMIN")
     @DeleteMapping("/movie/{id}")
     public MovieDto deleteMovie(@PathVariable final Long id) {
         return service.deleteMovie(id);

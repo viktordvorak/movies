@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -16,7 +17,10 @@ public class BorrowedDto {
     private long id;
     private Long customerID;
     private Long movieID;
+    private String movieName;
     private LocalDate borrowedDate;
     private LocalDate returnedDate;
+    private BigDecimal fine;
+    private String status;
 
 }

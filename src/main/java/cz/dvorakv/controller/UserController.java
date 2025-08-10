@@ -1,5 +1,6 @@
 package cz.dvorakv.controller;
 
+import cz.dvorakv.constant.UserRole;
 import cz.dvorakv.dto.UserDto;
 import cz.dvorakv.entity.UserEntity;
 import cz.dvorakv.entity.repository.filter.UserFilter;
@@ -82,6 +83,11 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public UserDto delete(@PathVariable final Long id) throws ServletException {
         return service.deleteUser(id);
+    }
+
+    @GetMapping("/user/roles")
+    public UserRole[] getUser()  {
+        return service.getRoles();
     }
 
     @ExceptionHandler(ServletException.class)

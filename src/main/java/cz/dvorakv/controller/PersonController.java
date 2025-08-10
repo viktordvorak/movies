@@ -22,7 +22,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @Secured("ROLE_ADMIN")
+    //@Secured("ROLE_ADMIN")
     @PostMapping({"/person", "person/"})
     public PersonDto addPerson(@RequestBody final PersonDto personDto) {
         return personService.addPerson(personDto);
@@ -49,7 +49,7 @@ public class PersonController {
         return personService.updatePerson(personDto, id);
     }
 
-    @Secured("ROLE_ADMIN")
+    //@Secured("ROLE_ADMIN")
     @DeleteMapping("/person/{id}")
     public PersonDto deletePerson(@PathVariable Long id) {
         return personService.deletePerson(id);

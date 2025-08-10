@@ -5,6 +5,7 @@ import cz.dvorakv.dto.BorrowedDto;
 import cz.dvorakv.dto.CustomerDto;
 import cz.dvorakv.dto.MovieDto;
 import cz.dvorakv.dto.PersonDto;
+import cz.dvorakv.dto.mapper.BorrowedMapper;
 import cz.dvorakv.dto.mapper.PersonMapper;
 import cz.dvorakv.entity.BorrowedEntity;
 import cz.dvorakv.entity.PersonEntity;
@@ -49,7 +50,7 @@ public class BorrowedTest {
     @Autowired
     private MovieService movieService;
     @Autowired
-    private PersonMapper mapper;
+    private BorrowedMapper mapper;
 
     @Test
     public void testAddBorrowed() {
@@ -66,13 +67,16 @@ public class BorrowedTest {
         borrowed.setCustomerID(customers.get(new Random().nextInt(customers.size())));
         borrowed.setMovieID(movies.get(new Random().nextInt(movies.size())));
         borrowed.setReturnedDate(LocalDate.now().minusDays(7));
+        borrowed.setStatus("BORROWED");
 
-        //Mockito.when(borrowedRepository.save(any(BorrowedDto.class))).thenReturn(borrowed);
+        val borrowedEntity = mapper.toEntity(borrowed, borrowedService);
+
+        Mockito.when(borrowedRepository.save(any(BorrowedEntity.class))).thenReturn(borrowedEntity);
 
         val created = borrowedService.createBorrowed(borrowed);
 
-        //Assert.assertEquals("John Doe", created.get);
-        //Mockito.verify(borrowed, Mockito.times(1)).save(borrowed);
+        Assert.assertEquals("BORROWED", created.getStatus());
+        Mockito.verify(borrowedRepository, Mockito.times(1)).save(borrowedEntity);
     }
 
 }

@@ -1,5 +1,6 @@
 package cz.dvorakv.service.impl;
 
+import cz.dvorakv.constant.UserRole;
 import cz.dvorakv.dto.UserDto;
 import cz.dvorakv.dto.mapper.UserMapper;
 import cz.dvorakv.entity.UserEntity;
@@ -96,6 +97,11 @@ public class UserServiceImpl implements UserService {
         repository.deleteById(id);
         return mapper.toDto(entity);
 
+    }
+
+    @Override
+    public UserRole[] getRoles() {
+        return UserRole.getValues();
     }
 
     @Override

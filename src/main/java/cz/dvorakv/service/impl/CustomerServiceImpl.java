@@ -36,4 +36,9 @@ public class CustomerServiceImpl implements CustomerService {
                  .collect(Collectors.toList());
     }
 
+    public CustomerDto getCustomer(final Long id) {
+        val entity =  repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Record not found"));
+        return mapper.toDto(entity);
+    }
+
 }

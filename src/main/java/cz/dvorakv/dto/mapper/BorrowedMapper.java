@@ -20,6 +20,9 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = { BorrowedService.class, MovieMapper.class, CustomerMapper.class })
 public interface BorrowedMapper {
 
+  @Mapping(target = "customerID", source = "customer.id")
+  @Mapping(target = "movieID", source = "movie.id")
+  @Mapping(target = "movieName", source = "movie.name")
   BorrowedDto toDto(BorrowedEntity source);
 
   @Mapping(target = "customer", expression = "java(mapCustomer(source.getCustomerID(), service))")

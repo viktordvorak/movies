@@ -14,4 +14,6 @@ public interface CustomerService {
 
     List<CustomerDto> getCustomers();
 
+    CustomerDto getCustomer(Long id);
+
 }

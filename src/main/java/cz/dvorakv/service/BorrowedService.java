@@ -16,6 +16,10 @@ public interface BorrowedService {
 
     BorrowedDto createBorrowed(BorrowedDto dto);
 
+    BorrowedDto getBorrowed(Long id);
+
+    List<BorrowedDto> getBorrowedAll();
+
     CustomerEntity mapCustomer(Long id);
 
     MovieEntity mapMovie(Long movieID);

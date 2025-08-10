@@ -48,9 +48,13 @@ public class RequestResponseLoggingFilter implements Filter {
 
     private void logResponse(HttpServletResponse response) {
         logger.info("Outgoing Response: Status: {} \n Headers: {} \n",
-                response.getStatus() + "\n",
+                response.getStatus(),
                 response.getHeaderNames().stream()
-                        .collect(Collectors.toMap(h -> h, response::getHeader)));
+                        .collect(Collectors.toMap(
+                                h -> h,
+                                h -> String.join(", ", response.getHeaders(h)), // Spojí všechny hodnoty hlaviček
+                                (existing, replacement) -> existing // Vybere první výskyt při konfliktu
+                        )));
     }
 
     @Override

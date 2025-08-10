@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author dvora
@@ -38,6 +39,20 @@ public class BorrowedServiceImpl implements BorrowedService {
         val borrowedEntity = mapper.toEntity(dto, this);
         val savedEntity = borrowedRepository.save(borrowedEntity);
         return mapper.toDto(savedEntity);
+    }
+
+    @Override
+    public BorrowedDto getBorrowed(Long id) {
+        val entity = borrowedRepository.getReferenceById(id);
+        return mapper.toDto(entity);
+    }
+
+    @Override
+    public List<BorrowedDto> getBorrowedAll() {
+        val entities = borrowedRepository.findAll();
+        return entities.stream()
+                .map(e -> mapper.toDto(e))
+                .collect(Collectors.toList());
     }
 
     @Override
